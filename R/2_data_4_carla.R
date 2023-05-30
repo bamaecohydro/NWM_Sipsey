@@ -108,7 +108,7 @@ error_fun <- function(n){
     nwm_data(
       date = dates[n],
       comids = comids), 
-    error = function(e) tibble(reach_id  = NA, streamflow_cms =NA, date = dates[n]))
+    error = function(e) tibble(reach_id  = NA, nwm_flow_cms =NA, date = dates[n]))
 }
 
 #Prep Clusters
@@ -132,6 +132,9 @@ df_nwm<-list_nwm %>% bind_rows()
 #Stop the clusters
 stopCluster(cl)
 
+#join to site name
+df_nwm <- left_join(df_nwm %>% rename(comid = reach_id), df_comid)
+
 #write csv
-write_csv(df_nwm, "docs//sipsey_nwm.csv")
+write.csv(df_nwm, "docs//sipsey.csv")
 
