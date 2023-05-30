@@ -79,7 +79,7 @@ nwm_data<-function(date, lat, long, crs){
 #Step 3: Apply Download Function -----------------------------------------------
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #create date input
-dates<-seq(ymd('1999-10-01'),ymd('2000-09-30'), by = '1 day')
+dates<-seq(ymd('1980-10-01'),ymd('2019-09-30'), by = '1 day')
 
 #create wrapper fun
 fun<-function(n){
