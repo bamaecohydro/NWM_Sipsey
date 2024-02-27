@@ -146,3 +146,21 @@ df_nwm <- left_join(df_nwm %>% rename(comid = reach_id), df_comid)
 #write csv
 write.csv(df_nwm, "OK_sites.csv")
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#Step 4: Metrics ---------------------------------------------------------------
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#Quick summary stats by sites
+metrics <- df_nwm %>% 
+  mutate(year = year(date)) %>% 
+  mutate(month=month(date)) %>% 
+  filter(month>5 & month< 9) %>% 
+  group_by(FIELD.CODE, year) %>% 
+  summarise(low_flow = min(nwm_flow_cms, na.rm=T)) %>% 
+  group_by(FIELD.CODE) %>% 
+  summarise(median_summer_lowflow = median(low_flow, na.rm=T))
+
+
+#write csv
+write.csv(df_nwm, "OK_metrics.csv")
+
